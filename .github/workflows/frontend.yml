@@ -23,13 +23,13 @@ jobs:
           cache: true
 
       - name: Lint code
-        run: pnpm run lint --dir ./frontend
+        run: cd frontend && pnpm run lint
 
       - name: Run tests
-        run: pnpm test --dir ./frontend
+        run: cd frontend && pnpm test 
 
       - name: Build app
-        run: pnpm run build --dir ./frontend
+        run: cd frontend && pnpm run build 
 
       - name: Build Storybook
-        run: pnpm run build-storybook --dir ./frontend
+        run: cd frontend && pnpm run build-storybook
