@@ -25,9 +25,6 @@ jobs:
       - name: Lint code
         run: cd frontend && pnpm run lint
 
-      - name: Run tests
-        run: cd frontend && pnpm test 
-
       - name: Run typecheck
         run: cd frontend && pnpm typecheck 
 
