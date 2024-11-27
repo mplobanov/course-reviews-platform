@@ -16,6 +16,7 @@ jobs:
       - name: Setup Node.js and pnpm
         uses: pnpm/action-setup@v2.2.4
         with:
+          package_json_file: ./frontend/package.json
           node-version: 16
           pnpm-version: 8
           run_install: true
