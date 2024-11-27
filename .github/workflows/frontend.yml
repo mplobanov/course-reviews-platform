@@ -28,6 +28,9 @@ jobs:
       - name: Run tests
         run: cd frontend && pnpm test 
 
+      - name: Run typecheck
+        run: cd frontend && pnpm typecheck 
+
       - name: Build app
         run: cd frontend && pnpm run build 
 
