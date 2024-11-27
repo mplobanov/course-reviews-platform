@@ -28,8 +28,5 @@ jobs:
       - name: Run typecheck
         run: cd frontend && pnpm typecheck 
 
-      - name: Build app
-        run: cd frontend && pnpm run build 
-
       - name: Build Storybook
         run: cd frontend && pnpm run build-storybook
