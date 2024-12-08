@@ -1,7 +1,6 @@
-import {useState} from 'react';
+import React from 'react';
+import {Button, TextInput as GravityTextInput} from '@gravity-ui/uikit';
 
-import {TextInput as GravityTextInput} from '@gravity-ui/uikit';
-import { Button } from '../button/component';
 
 import styles from './component.module.css'
 import coursesAll from '../../data/courses.json'
@@ -22,7 +21,7 @@ export const SearchField = () => {
     return (
       <div className = {styles.main}>
         <GravityTextInput placeholder={'Search...'} name={searchValue} onChange={(it) => searchVar(it.target.value)} className={styles.searchField} size="l"/>
-        <Button label={'Найти'} onClick={() => eventSearchCourse()}/>
+        <Button view='action' size='l' onClick={eventSearchCourse} >{'Найти'}</Button>
       </div>
       );
 }

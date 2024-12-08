@@ -1,14 +1,15 @@
+import React from 'react';
 import {SearchField } from "../searchField/component";
-import { Button } from "../button/component";
 import { Filter } from "../filter/component";
 import styles from './component.module.css'
+import { Button } from '@gravity-ui/uikit';
 
 export const TableHeader = () => {
     return (
         <div className={styles.main}>
             <Filter />
             <SearchField />
-            <Button label={'+ Создать курс'} onClick={() => {console.log('Создать курс')}}/>
+            <Button view='action' size='l' >{'+ Создать курс'}</Button>
         </div>
       );
 }
