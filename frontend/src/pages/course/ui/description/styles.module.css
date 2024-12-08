@@ -1,0 +1,11 @@
+.description {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.descriptionSection {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
