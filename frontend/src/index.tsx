@@ -8,7 +8,6 @@ import { ThemeProvider } from '@gravity-ui/uikit';
 
 import '@gravity-ui/uikit/styles/fonts.css';
 import '@gravity-ui/uikit/styles/styles.css';
-import { Button } from './components/button/component';
 
 
 const root = ReactDOM.createRoot(
@@ -18,7 +17,6 @@ root.render(
   <React.StrictMode>
     <ThemeProvider theme="light">
       <App />
-      <Button label='aa' />
     </ThemeProvider>
   </React.StrictMode>,
 );

@@ -1,0 +1,30 @@
+.main {
+    font-size: 20px;
+    width: 80%;
+    margin-top: 3vh;
+}
+
+.cellId {
+    width: 5%;
+    border: #7F56D9;
+}
+
+.cellNameCourse {
+    width: 25%;
+}
+
+.cellPassed .cellExtern {
+    width: 15%;
+}
+
+.cellTeacher {
+    width: 20%;
+
+}
+
+.cellAssessment {
+    width: 10%
+}
+
+
+
