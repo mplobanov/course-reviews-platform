@@ -15,7 +15,7 @@ servers:
 paths:
   /courses:
     get:
-      summary: Get courses
+      summary: Get courss
       operationId: getCourses
       parameters:
         - name: only_available
