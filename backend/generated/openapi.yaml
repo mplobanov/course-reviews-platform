@@ -39,8 +39,7 @@ paths:
         schema:
           type: boolean
         style: form
-      - description: Text to search courses
-        explode: true
+      - explode: true
         in: query
         name: text_query
         required: false
@@ -57,103 +56,9 @@ paths:
         "403":
           description: User not authorized
       summary: Get courss
-    post:
-      operationId: postCourse
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CourseInfo'
-        required: true
-      responses:
-        "201":
-          description: Course created
-        "403":
-          description: User not authorized
-      summary: Create a course
-  /courses/{id}:
-    get:
-      operationId: getCourse
-      parameters:
-      - description: ID of the course
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CourseInfo'
-          description: Course details
-        "403":
-          description: User not authorized
-      summary: Get course details
-  /courses/{id}/reviews:
-    get:
-      operationId: getCourseReviews
-      parameters:
-      - description: ID of the course
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-        style: simple
-      - description: Pagination cursor
-        explode: true
-        in: query
-        name: cursor
-        required: false
-        schema:
-          type: string
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getCourseReviews_200_response'
-          description: List of course reviews
-        "403":
-          description: User not authorized
-      summary: Get course reviews
-  /teachers:
-    get:
-      operationId: getTeachers
-      parameters:
-      - description: Search query for teachers
-        explode: true
-        in: query
-        name: query
-        required: false
-        schema:
-          type: string
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/Teacher'
-                type: array
-          description: List of teachers
-      summary: Search teachers
 components:
   schemas:
     User:
-      example:
-        is_superuser: true
-        name: name
-        id: 0
-        passport_token: passport_token
-        profile_pic_url: profile_pic_url
       properties:
         id:
           title: id
@@ -192,11 +97,6 @@ components:
       title: Teacher
       type: object
     Mark:
-      example:
-        name: name
-        id: 6
-        value: 1.4658129805029452
-        max_value: 5.962133916683182
       properties:
         id:
           title: id
@@ -291,41 +191,8 @@ components:
         required:
         - general_description
         type: object
-      example:
-        has_extern: true
-        prerequisites:
-        - name: name
-          id: 5
-        - name: name
-          id: 5
-        is_passed: true
-        teacher:
-          average_grade: 1.4658129805029452
-          name: name
-          id: 6
-        extern_description: extern_description
-        name: name
-        general_description: general_description
-        recredit_description: recredit_description
-        id: 0
-        marks:
-        - note: note
-          name: name
-          id: 5
-          value: 2.3021358869347655
-          max_value: 7.061401241503109
-        - note: note
-          name: name
-          id: 5
-          value: 2.3021358869347655
-          max_value: 7.061401241503109
-        recredit_available: true
-      title: CourseInfo
       type: object
     Grade:
-      example:
-        dislikes: 2
-        likes: 5
       properties:
         likes:
           title: likes
@@ -339,55 +206,26 @@ components:
       title: Grade
       type: object
     Review:
-      example:
-        is_recredit: true
-        author:
-          is_superuser: true
-          name: name
-          id: 0
-          passport_token: passport_token
-          profile_pic_url: profile_pic_url
-        is_extern: true
-        is_hidden: true
-        marks:
-        - name: name
-          id: 6
-          value: 1.4658129805029452
-          max_value: 5.962133916683182
-        - name: name
-          id: 6
-          value: 1.4658129805029452
-          max_value: 5.962133916683182
-        text: text
-        grades:
-          dislikes: 2
-          likes: 5
       properties:
         author:
           $ref: '#/components/schemas/User'
         marks:
           items:
             $ref: '#/components/schemas/Mark'
-          title: marks
           type: array
         text:
-          title: text
           type: string
         is_extern:
-          title: is_extern
           type: boolean
         is_recredit:
-          title: is_recredit
           type: boolean
         is_hidden:
-          title: is_hidden
           type: boolean
         grades:
           $ref: '#/components/schemas/Grade'
       required:
       - grades
       - marks
-      title: Review
       type: object
     getCourses_200_response:
       example:
@@ -449,65 +287,6 @@ components:
           title: courses
           type: array
       title: getCourses_200_response
-      type: object
-    getCourseReviews_200_response:
-      example:
-        next_cursor: next_cursor
-        reviews:
-        - is_recredit: true
-          author:
-            is_superuser: true
-            name: name
-            id: 0
-            passport_token: passport_token
-            profile_pic_url: profile_pic_url
-          is_extern: true
-          is_hidden: true
-          marks:
-          - name: name
-            id: 6
-            value: 1.4658129805029452
-            max_value: 5.962133916683182
-          - name: name
-            id: 6
-            value: 1.4658129805029452
-            max_value: 5.962133916683182
-          text: text
-          grades:
-            dislikes: 2
-            likes: 5
-        - is_recredit: true
-          author:
-            is_superuser: true
-            name: name
-            id: 0
-            passport_token: passport_token
-            profile_pic_url: profile_pic_url
-          is_extern: true
-          is_hidden: true
-          marks:
-          - name: name
-            id: 6
-            value: 1.4658129805029452
-            max_value: 5.962133916683182
-          - name: name
-            id: 6
-            value: 1.4658129805029452
-            max_value: 5.962133916683182
-          text: text
-          grades:
-            dislikes: 2
-            likes: 5
-      properties:
-        reviews:
-          items:
-            $ref: '#/components/schemas/Review'
-          title: reviews
-          type: array
-        next_cursor:
-          title: next_cursor
-          type: string
-      title: getCourseReviews_200_response
       type: object
     CourseShortInfo_prerequisites_inner:
       example:
