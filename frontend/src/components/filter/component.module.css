@@ -1,0 +1,24 @@
+.dropDownBlock {
+    padding-top: 0.5vw;
+    padding-bottom: 0.5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: solid 0.1vw rgb(127, 86, 217);
+    border-radius: 0.5vw;
+    position: absolute;
+    z-index: 100;
+    background-color: white;
+    margin-top: 2vh;
+}
+
+.filter {
+    border-bottom: rgb(233, 237, 245) solid 0.1vw;
+}
+
+.button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

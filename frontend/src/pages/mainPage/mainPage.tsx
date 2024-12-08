@@ -18,11 +18,11 @@ export const searchVar = makeVar('')
 export const MainPage = () => {
     return (
         <div>
-            <Header headingName='Курсы 1С' imgUrl='../../../public/logo192.png'/>
-                <div className={styles.tableSpace}>
-                    <TableHeader />
-                    <Table />
-                </div>
+            <Header headingName='Курсы 1С'/>
+            <div className={styles.tableSpace}>
+                <TableHeader />
+                <Table />
+            </div>
         </div>
         
     )

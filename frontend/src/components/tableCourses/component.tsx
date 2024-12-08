@@ -3,6 +3,7 @@ import styles from './component.module.css'
 import { coursesVar } from '../../pages/mainPage/mainPage';
 import { useReactiveVar } from '@apollo/client';
 import teachers from '../../data/teachers.json'
+import { storeValueIsStoreObject } from '@apollo/client/cache/inmemory/helpers';
 
 
 
@@ -35,8 +36,12 @@ export const Table = () => {
             coursesNow.push({
                 "id": it.id,
                 "nameCourse": it.nameCourse,
-                "passed": <Checkbox checked={it.passed} onChange={() => changePassedCourse(id)}></Checkbox>,
-                "extern": <Text color={it.extern ? "positive" : "danger"}>{it.extern ? "Да" : "Нет"}</Text>,
+                "passed": <div>
+                            <Checkbox checked={it.passed} onChange={() => changePassedCourse(id)} className={styles.passed} size='l'/>
+                        </div>,
+                "extern": <div>
+                            <Text color={it.extern ? "positive" : "danger"} className={styles.extern}>{it.extern ? "Да" : "Нет"}</Text>
+                        </div>,
                 "lightness": it.lightness,
                 "teacher": <div>
                                 {it.teacher}
@@ -51,8 +56,8 @@ export const Table = () => {
 
     const columns =     [{id: 'id', name:'id', className: styles.cellId},
                          {id: 'nameCourse', name:'название курса', className: styles.cellNameCourse},
-                         {id: 'passed', name:'пройден', className: styles.cellPassed},
-                         {id: 'extern', name:'экстрен', className: styles.cellExtern},
+                         {id: 'passed', name:'пройден', className: styles.Passed},
+                         {id: 'extern', name:'экстрен', className: styles.Extern},
                          {id: 'teacher', name:'преподаватель', meta: {sort: true}, className: styles.cellTeacher},
                          {id: 'generalAssessment', name:'общая оценка', meta: {sort: true}, className: styles.cellAssessment}]
 

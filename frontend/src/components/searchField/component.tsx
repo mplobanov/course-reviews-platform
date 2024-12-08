@@ -20,8 +20,8 @@ export const SearchField = () => {
     }
 
     return (
-      <div>
-        <GravityTextInput placeholder={'Search...'} name={searchValue} onChange={(it) => searchVar(it.target.value)} className = {styles.main}/>
+      <div className = {styles.main}>
+        <GravityTextInput placeholder={'Search...'} name={searchValue} onChange={(it) => searchVar(it.target.value)} className={styles.searchField} size="l"/>
         <Button label={'Найти'} onClick={() => eventSearchCourse()}/>
       </div>
       );
