@@ -1,0 +1,38 @@
+.main {
+    font-size: 20px;
+    width: 80%;
+    margin-top: 3vh;
+
+}
+
+.cellId {
+    width: 5%;
+}
+
+.cellNameCourse {
+    width: 25%;
+}
+
+.cellPassed .cellExtern {
+    width: 15%;
+}
+
+.cellTeacher {
+    width: 20%;
+}
+
+.cellAssessment {
+    width: 10%;
+    text-align: center;
+}
+
+.extern {
+    font-size: 20px;
+}
+
+.passed {
+    border: solid rgb(127, 86, 217, 0.5) 0.2vw;
+    border-radius: 0.3vw;
+}
+
+

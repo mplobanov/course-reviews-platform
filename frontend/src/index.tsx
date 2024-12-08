@@ -8,6 +8,7 @@ import { ThemeProvider } from '@gravity-ui/uikit';
 
 import '@gravity-ui/uikit/styles/fonts.css';
 import '@gravity-ui/uikit/styles/styles.css';
+
 import './index.css';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import { CoursePage } from './pages/course/container';
