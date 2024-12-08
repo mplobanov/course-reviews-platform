@@ -72,7 +72,6 @@
     "globals": "^15.12.0",
     "prettier": "^3.4.1",
     "prop-types": "^15.8.1",
-    "sass": "^1.82.0",
     "storybook": "^8.4.5",
     "typescript-eslint": "^8.16.0",
     "webpack": "^5.96.1"
