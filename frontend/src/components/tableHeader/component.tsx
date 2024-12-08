@@ -8,7 +8,7 @@ export const TableHeader = () => {
         <div className={styles.main}>
             <Filter />
             <SearchField />
-            <Button label={'+ Создать курс'}/>
+            <Button label={'+ Создать курс'} onClick={() => {console.log('Создать курс')}}/>
         </div>
       );
 }

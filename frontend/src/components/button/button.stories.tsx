@@ -9,7 +9,7 @@ export default {
   component: Button,
 } as Meta<typeof Button>;
 
-const Template: StoryFn<{ label: string }> = (args) => (
+const Template: StoryFn<{ label: string , onClick: () => void}> = (args) => (
   <ThemeProvider theme="light">
     <Button {...args} />
   </ThemeProvider>
@@ -18,4 +18,5 @@ const Template: StoryFn<{ label: string }> = (args) => (
 export const Primary = Template.bind({});
 Primary.args = {
   label: 'Click Me',
+  onClick: () => console.log('Click Me'),
 };

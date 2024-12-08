@@ -1,4 +1,4 @@
-import {Table as GravityTable, withTableSorting, withTableActions, Checkbox, Label} from '@gravity-ui/uikit';
+import {Table as GravityTable, withTableSorting, withTableActions, Checkbox, Label, Text} from '@gravity-ui/uikit';
 import styles from './component.module.css'
 import { coursesVar } from '../../pages/mainPage/mainPage';
 import { useReactiveVar } from '@apollo/client';
@@ -36,7 +36,7 @@ export const Table = () => {
                 "id": it.id,
                 "nameCourse": it.nameCourse,
                 "passed": <Checkbox checked={it.passed} onChange={() => changePassedCourse(id)}></Checkbox>,
-                "extern": <Label theme={it.extern ? "success" : "danger"}>{it.extern ? "Да" : "Нет"}</Label>,
+                "extern": <Text color={it.extern ? "positive" : "danger"}>{it.extern ? "Да" : "Нет"}</Text>,
                 "lightness": it.lightness,
                 "teacher": <div>
                                 {it.teacher}

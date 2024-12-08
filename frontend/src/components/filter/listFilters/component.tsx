@@ -1,4 +1,5 @@
-import {Menu, Checkbox, Button, ArrowToggle} from '@gravity-ui/uikit';
+import {Menu, Checkbox, Button as GravityButton, ArrowToggle} from '@gravity-ui/uikit';
+import { Button } from '../../button/component';
 import { useState } from 'react';
 import coursesAll from '../../../data/courses.json'
 import teachers from '../../../data/teachers.json'
@@ -38,16 +39,16 @@ export const ListFilters = () => {
 
     return (
         <div>
-            {!isOpen && <Button onClick={()=>setIsOpen(true)}><ArrowToggle direction="right" /></Button>}
+            {!isOpen && <GravityButton onClick={()=>setIsOpen(true)}><ArrowToggle direction="right" /></GravityButton>}
             {isOpen &&
             <div> 
-                <Button onClick={()=>setIsOpen(false)}><ArrowToggle direction="bottom" /></Button>
+                <GravityButton onClick={()=>setIsOpen(false)}><ArrowToggle direction="bottom" /></GravityButton>
                 <Menu size="m">
                 {filters.map((item, id) => (
                     <Menu.Item><Checkbox content={item.name} checked={item.value} onChange={() => changeStateFilters(id)}/></Menu.Item>
                 ))}
                 </Menu>
-                <Button onClick={()=>eventApplyFilters()}>Применить Фильтры</Button>
+                <Button label={"Фильтровать"} onClick={()=>eventApplyFilters()}/>
             </div>}
         </div>
     )
