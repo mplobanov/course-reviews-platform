@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { ThemeProvider } from '@gravity-ui/uikit';
@@ -12,6 +11,7 @@ import '@gravity-ui/uikit/styles/styles.css';
 import './index.css';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import { CoursePage } from './pages/course/container';
+import { MainPage } from './pages/mainPage/mainPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -21,7 +21,7 @@ root.render(
     <ThemeProvider theme="light">
       <BrowserRouter>
         <Routes>
-          <Route index element={<App />} />
+          <Route index element={<MainPage />} />
           <Route path="course">
             <Route path=":id" element={<CoursePage />} />
           </Route>

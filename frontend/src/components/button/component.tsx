@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 
 import { Button as GravityButton } from '@gravity-ui/uikit';
 
