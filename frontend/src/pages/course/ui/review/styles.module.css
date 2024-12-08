@@ -1,0 +1,46 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.author {
+    display: flex;
+    gap: 10px;
+
+    align-items: center;
+}
+
+.profilePic {
+    border-radius: 20px;
+    height: 40px;
+    width: 40px;
+}
+
+.facts {
+    display: flex;
+    gap: 5px;
+}
+
+.fact {
+    border-radius: 5px;
+    padding: 4px 12px;
+}
+
+.neutralFact {
+    background-color: #eee;
+}
+
+.goodFact {
+    background-color: #E1FCEF;
+}
+
+.badFact {
+    background-color: #FCE3E1;
+}
+
+.hidden {
+    text-decoration: underline;
+    cursor: pointer;
+    opacity: 0.6;
+}
