@@ -8,8 +8,7 @@ servers:
     description: Production server
 # TODO: Auth
 # TODO: Пагинация
-# TODO: Оставление отзыва
-# TODO: Лайк, Дизлайк
+# TODO: POST запросы
 # TODO: система оценок
 
 paths:
@@ -47,7 +46,6 @@ paths:
           required: false
           schema:
             type: string
-        # TODO: пагинация
       responses:
         "200":
           description: A list of courses
@@ -78,81 +76,74 @@ paths:
     #     '403':
     #       description: User not authorized
 
-  # /courses/{id}:
-  #   get:
-  #     summary: Get course details
-  #     operationId: getCourse
-  #     parameters:
-  #       - name: id
-  #         in: path
-  #         description: ID of the course
-  #         required: true
-  #         schema:
-  #           type: integer
-  #     responses:
-  #       '200':
-  #         description: Course details
-  #         content:
-  #           application/json:
-  #             schema:
-  #               $ref: '#/components/schemas/CourseInfo'
-  #       '403':
-  #         description: User not authorized
+  /courses/{id}:
+    get:
+      summary: Get course details
+      operationId: getCourse
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Course details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CourseInfo'
+        '403':
+          description: User not authorized
+        '404':
+          description: "Course not found"
 
-  # /courses/{id}/reviews:
-  #   get:
-  #     summary: Get course reviews
-  #     operationId: getCourseReviews
-  #     parameters:
-  #       - name: id
-  #         in: path
-  #         description: ID of the course
-  #         required: true
-  #         schema:
-  #           type: integer
-  #       - name: cursor #TODO: обдумать
-  #         in: query
-  #         description: Pagination cursor
-  #         required: false
-  #         schema:
-  #           type: string
-  #     responses:
-  #       '200':
-  #         description: List of course reviews
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: object
-  #               properties:
-  #                 reviews:
-  #                   type: array
-  #                   items:
-  #                     $ref: '#/components/schemas/Review'
-  #                 next_cursor:
-  #                   type: string
-  #       '403':
-  #         description: User not authorized
+  /courses/{id}/reviews:
+    get:
+      summary: Get course reviews
+      operationId: getCourseReviews
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of course reviews
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reviews:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Review'
+        '403':
+          description: User not authorized
+        '404':
+          description: "Course not found"
 
-  # /teachers:
-  #   get:
-  #     summary: Search teachers
-  #     operationId: getTeachers
-  #     parameters:
-  #       - name: query
-  #         in: query
-  #         description: Search query for teachers
-  #         required: false
-  #         schema:
-  #           type: string
-  #     responses:
-  #       '200':
-  #         description: List of teachers
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: array
-  #               items:
-  #                 $ref: '#/components/schemas/Teacher'
+  /teachers:
+    get:
+      summary: Search teachers
+      operationId: getTeachers
+      parameters:
+        - name: query
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of teachers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Teacher'
 
 components:
   schemas:
@@ -169,6 +160,7 @@ components:
           type: string
         is_superuser:
           type: boolean
+      required: [id, name, passport_token]
 
     Teacher:
       type: object

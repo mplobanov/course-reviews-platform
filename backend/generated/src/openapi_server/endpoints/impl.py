@@ -1,23 +1,15 @@
 from openapi_server.apis.default_api_base import BaseDefaultApi
 from openapi_server.models.get_courses200_response import GetCourses200Response
-from pydantic import StrictBool, StrictStr
-from typing import Any, Optional
+from openapi_server.models.course_info import CourseInfo
+from pydantic import Field, StrictBool, StrictInt, StrictStr
+from typing import Any, List, Optional
+from typing_extensions import Annotated
+from fastapi.responses import JSONResponse
+from openapi_server.models.teacher import Teacher
+from openapi_server.models.get_course_reviews200_response import GetCourseReviews200Response
 
+import openapi_server.mock.mock_data as mock
 
-teacher_info = {"id": 1,
-                "name": "Владимир Щелов",
-                "average_grade": 4.6,
-                }
-
-course_info = {"id": 1,
-               "name": "Arch1",
-               "is_passed": True,
-               "has_extern": False,
-               "recredit_available": False,
-               "teacher": teacher_info,
-               "prerequisites": [{"id": 0, "name": "VCS"}],
-               "marks": []
-               }
 
 
 class ApiImplementation(BaseDefaultApi):
@@ -29,4 +21,29 @@ class ApiImplementation(BaseDefaultApi):
         high_teacher_rating: Optional[StrictBool],
         text_query: Optional[StrictStr],
     ) -> GetCourses200Response:
-        return GetCourses200Response( courses = [course_info])
+        return GetCourses200Response(courses=mock.courses_short_info)
+
+    async def get_course(
+        self,
+        id: Annotated[StrictInt, Field(description="ID of the course")],
+    ) -> CourseInfo:
+        result = next(
+            (item for item in mock.cources_info if item.get("id") == id), None)
+        if result is None:
+            return JSONResponse(status_code=404, content={"message": "Course not found"})
+        return CourseInfo(**result)
+
+    async def get_teachers(
+        self,
+        query: Annotated[Optional[StrictStr], Field(description="Search query for teachers")],
+    ) -> List[Teacher]:
+        return mock.teachers
+
+    async def get_course_reviews(
+        self,
+        id: StrictInt,
+    ) -> GetCourseReviews200Response:
+        reviews = mock.courses_reviews.get(id)
+        if reviews is None:
+            return JSONResponse(status_code=404, content={"message": "Course not found"})
+        return GetCourseReviews200Response(reviews = reviews)

@@ -18,6 +18,7 @@ src/openapi_server/models/course_short_info.py
 src/openapi_server/models/course_short_info_marks_inner.py
 src/openapi_server/models/course_short_info_prerequisites_inner.py
 src/openapi_server/models/extra_models.py
+src/openapi_server/models/get_course_reviews200_response.py
 src/openapi_server/models/get_courses200_response.py
 src/openapi_server/models/grade.py
 src/openapi_server/models/mark.py

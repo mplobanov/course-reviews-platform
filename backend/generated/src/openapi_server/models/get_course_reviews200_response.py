@@ -20,23 +20,20 @@ import json
 
 
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
+from openapi_server.models.review import Review
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
-class User(BaseModel):
+class GetCourseReviews200Response(BaseModel):
     """
-    User
+    GetCourseReviews200Response
     """ # noqa: E501
-    id: StrictInt
-    name: StrictStr
-    profile_pic_url: Optional[StrictStr] = None
-    passport_token: StrictStr
-    is_superuser: Optional[StrictBool] = None
-    __properties: ClassVar[List[str]] = ["id", "name", "profile_pic_url", "passport_token", "is_superuser"]
+    reviews: Optional[List[Review]] = None
+    __properties: ClassVar[List[str]] = ["reviews"]
 
     model_config = {
         "populate_by_name": True,
@@ -56,7 +53,7 @@ class User(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of User from a JSON string"""
+        """Create an instance of GetCourseReviews200Response from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -75,11 +72,18 @@ class User(BaseModel):
             },
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in reviews (list)
+        _items = []
+        if self.reviews:
+            for _item in self.reviews:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['reviews'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Dict) -> Self:
-        """Create an instance of User from a dict"""
+        """Create an instance of GetCourseReviews200Response from a dict"""
         if obj is None:
             return None
 
@@ -87,11 +91,7 @@ class User(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "name": obj.get("name"),
-            "profile_pic_url": obj.get("profile_pic_url"),
-            "passport_token": obj.get("passport_token"),
-            "is_superuser": obj.get("is_superuser")
+            "reviews": [Review.from_dict(_item) for _item in obj.get("reviews")] if obj.get("reviews") is not None else None
         })
         return _obj
 
