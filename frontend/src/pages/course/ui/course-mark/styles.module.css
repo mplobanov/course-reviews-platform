@@ -1,0 +1,48 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.barContainer {
+    display: flex;
+    gap: 10px;
+}
+
+.bar {
+    flex-grow: 1;
+    position: relative;
+}
+
+.backBar {
+    width: 100%;
+    border-radius: 4px;
+    height: 8px;
+    background-color: #E9EAEB;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
+
+.valueBar {
+    border-radius: 4px;
+    height: 8px;
+    background-color: var(--g-color-base-brand);
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+}
+
+.value {
+    transform: translateY(-5px);
+}
+
+.caption {
+    display: flex;
+}
+
+.spacer {
+    flex-grow: 1;
+}

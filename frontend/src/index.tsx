@@ -1,15 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+
 import reportWebVitals from './reportWebVitals';
 
 import { ThemeProvider } from '@gravity-ui/uikit';
 
 import '@gravity-ui/uikit/styles/fonts.css';
 import '@gravity-ui/uikit/styles/styles.css';
-import { Button } from './components/button/component';
 
+import './index.css';
+import { BrowserRouter, Route, Routes } from 'react-router';
+import { CoursePage } from './pages/course/container';
+import { MainPage } from './pages/mainPage/mainPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -17,8 +19,14 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ThemeProvider theme="light">
-      <App />
-      <Button label='aa' />
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<MainPage />} />
+          <Route path="course">
+            <Route path=":id" element={<CoursePage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>,
 );

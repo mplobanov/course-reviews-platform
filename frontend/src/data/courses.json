@@ -1,0 +1,21 @@
+[
+    {
+        "id": 1,
+        "nameCourse": "Архитектуры",
+        "passed": false,
+        "extern": false,
+        "lightness": 4.0,
+        "teacher": "Щелов Владимир",
+        "generalAssessment": 4.5
+    },
+    {
+        "id": 2,
+        "nameCourse": "Промышленное программирование",
+        "passed": false,
+        "extern": true,
+        "lightness": 4.8,
+        "teacher": "Ахтямов Павел",
+        "generalAssessment": 4.9
+    }
+
+]
