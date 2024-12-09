@@ -20,28 +20,23 @@ import json
 
 
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
-from openapi_server.models.course_short_info_prerequisites_inner import CourseShortInfoPrerequisitesInner
-from openapi_server.models.teacher import Teacher
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
-class CourseShortInfo(BaseModel):
+class CourseInfoAllOfMarksInner(BaseModel):
     """
-    CourseShortInfo
+    CourseInfoAllOfMarksInner
     """ # noqa: E501
-    id: StrictInt
-    name: StrictStr
-    is_passed: StrictBool
-    has_extern: StrictBool
-    recredit_available: StrictBool
-    teacher: Teacher
-    prerequisites: List[CourseShortInfoPrerequisitesInner]
-    avg_mark: Optional[Union[StrictFloat, StrictInt]] = None
-    __properties: ClassVar[List[str]] = ["id", "name", "is_passed", "has_extern", "recredit_available", "teacher", "prerequisites", "avg_mark"]
+    id: Optional[StrictInt] = None
+    name: Optional[StrictStr] = None
+    value: Optional[Union[StrictFloat, StrictInt]] = None
+    max_value: Optional[Union[StrictFloat, StrictInt]] = None
+    note: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "name", "value", "max_value", "note"]
 
     model_config = {
         "populate_by_name": True,
@@ -61,7 +56,7 @@ class CourseShortInfo(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of CourseShortInfo from a JSON string"""
+        """Create an instance of CourseInfoAllOfMarksInner from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -80,21 +75,11 @@ class CourseShortInfo(BaseModel):
             },
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of teacher
-        if self.teacher:
-            _dict['teacher'] = self.teacher.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in prerequisites (list)
-        _items = []
-        if self.prerequisites:
-            for _item in self.prerequisites:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['prerequisites'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Dict) -> Self:
-        """Create an instance of CourseShortInfo from a dict"""
+        """Create an instance of CourseInfoAllOfMarksInner from a dict"""
         if obj is None:
             return None
 
@@ -104,12 +89,9 @@ class CourseShortInfo(BaseModel):
         _obj = cls.model_validate({
             "id": obj.get("id"),
             "name": obj.get("name"),
-            "is_passed": obj.get("is_passed"),
-            "has_extern": obj.get("has_extern"),
-            "recredit_available": obj.get("recredit_available"),
-            "teacher": Teacher.from_dict(obj.get("teacher")) if obj.get("teacher") is not None else None,
-            "prerequisites": [CourseShortInfoPrerequisitesInner.from_dict(_item) for _item in obj.get("prerequisites")] if obj.get("prerequisites") is not None else None,
-            "avg_mark": obj.get("avg_mark")
+            "value": obj.get("value"),
+            "max_value": obj.get("max_value"),
+            "note": obj.get("note")
         })
         return _obj
 

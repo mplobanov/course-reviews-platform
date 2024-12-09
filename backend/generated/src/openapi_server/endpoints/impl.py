@@ -7,12 +7,12 @@ from typing_extensions import Annotated
 from fastapi.responses import JSONResponse
 from openapi_server.models.teacher import Teacher
 from openapi_server.models.get_course_reviews200_response import GetCourseReviews200Response
-
 import openapi_server.mock.mock_data as mock
 
-
+from openapi_server.db.db import DB
 
 class ApiImplementation(BaseDefaultApi):
+    db_adapter = DB()
     async def get_courses(
         self,
         only_available: Optional[StrictBool],
@@ -21,7 +21,7 @@ class ApiImplementation(BaseDefaultApi):
         high_teacher_rating: Optional[StrictBool],
         text_query: Optional[StrictStr],
     ) -> GetCourses200Response:
-        return GetCourses200Response(courses=mock.courses_short_info)
+        return GetCourses200Response(courses = self.db_adapter.getCourses())
 
     async def get_course(
         self,

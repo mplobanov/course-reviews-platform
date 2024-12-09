@@ -19,25 +19,21 @@ paths:
       parameters:
         - name: only_available
           in: query
-          # description:
           required: false
           schema:
             type: boolean
         - name: have_extern
           in: query
-          # description:
           required: false
           schema:
             type: boolean
         - name: high_simplicity
           in: query
-          # description:
           required: false
           schema:
             type: boolean
         - name: high_teacher_rating
           in: query
-          # description:
           required: false
           schema:
             type: boolean
@@ -144,7 +140,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Teacher'
-
 components:
   schemas:
     User:
@@ -173,7 +168,7 @@ components:
           type: number
       required: [id]
 
-    Mark: #TODO: подумать
+    Mark:
       type: object
       properties:
         id:
@@ -209,16 +204,9 @@ components:
                 type: integer
               name:
                 type: string
-        marks:
-          type: array
-          items:
-            type: object
-            allOf:
-              - $ref: "#/components/schemas/Mark"
-              - type: object
-                properties:
-                  note:
-                    type: string
+        avg_mark:
+          type: number
+
       required:
         [
           id,
@@ -237,6 +225,16 @@ components:
         - $ref: "#/components/schemas/CourseShortInfo"
         - type: object
           properties:
+            marks:
+              type: array
+              items:
+                type: object
+                allOf:
+                - $ref: "#/components/schemas/Mark"
+                - type: object
+                  properties:
+                    note:
+                      type: string
             general_description:
               type: string
             extern_description:

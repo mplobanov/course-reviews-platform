@@ -20,9 +20,9 @@ import json
 
 
 
-from pydantic import BaseModel, ConfigDict, StrictBool, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from openapi_server.models.course_short_info_marks_inner import CourseShortInfoMarksInner
+from pydantic import BaseModel, ConfigDict, StrictBool, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
+from openapi_server.models.course_info_all_of_marks_inner import CourseInfoAllOfMarksInner
 from openapi_server.models.course_short_info_prerequisites_inner import CourseShortInfoPrerequisitesInner
 from openapi_server.models.teacher import Teacher
 try:
@@ -41,11 +41,12 @@ class CourseInfo(BaseModel):
     recredit_available: StrictBool
     teacher: Teacher
     prerequisites: List[CourseShortInfoPrerequisitesInner]
-    marks: List[CourseShortInfoMarksInner]
+    avg_mark: Optional[Union[StrictFloat, StrictInt]] = None
+    marks: List[CourseInfoAllOfMarksInner]
     general_description: StrictStr
     extern_description: Optional[StrictStr] = None
     recredit_description: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["id", "name", "is_passed", "has_extern", "recredit_available", "teacher", "prerequisites", "marks", "general_description", "extern_description", "recredit_description"]
+    __properties: ClassVar[List[str]] = ["id", "name", "is_passed", "has_extern", "recredit_available", "teacher", "prerequisites", "avg_mark", "marks", "general_description", "extern_description", "recredit_description"]
 
     model_config = {
         "populate_by_name": True,
@@ -120,7 +121,8 @@ class CourseInfo(BaseModel):
             "recredit_available": obj.get("recredit_available"),
             "teacher": Teacher.from_dict(obj.get("teacher")) if obj.get("teacher") is not None else None,
             "prerequisites": [CourseShortInfoPrerequisitesInner.from_dict(_item) for _item in obj.get("prerequisites")] if obj.get("prerequisites") is not None else None,
-            "marks": [CourseShortInfoMarksInner.from_dict(_item) for _item in obj.get("marks")] if obj.get("marks") is not None else None,
+            "avg_mark": obj.get("avg_mark"),
+            "marks": [CourseInfoAllOfMarksInner.from_dict(_item) for _item in obj.get("marks")] if obj.get("marks") is not None else None,
             "general_description": obj.get("general_description"),
             "extern_description": obj.get("extern_description"),
             "recredit_description": obj.get("recredit_description")
