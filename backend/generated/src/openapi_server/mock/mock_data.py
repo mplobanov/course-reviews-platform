@@ -57,7 +57,7 @@ courses_short_info = [
         "has_extern": False,
         "recredit_available": False,
         "teacher": teachers[0],
-        "marks": marks[0:2],
+        "avg_mark": 7.3,
         "prerequisites": [{"id": 0, "name": "VCS"}]
     },
     {
@@ -67,7 +67,7 @@ courses_short_info = [
         "has_extern": True,
         "recredit_available": True,
         "teacher": teachers[1],
-        "marks": marks[2:5],
+        "avg_mark": 5.4,
         "prerequisites": [{"id": 1, "name": "Algorithms"}]
     },
     {
@@ -77,7 +77,7 @@ courses_short_info = [
         "has_extern": False,
         "recredit_available": False,
         "teacher": teachers[3],
-        "marks": marks[3:7],
+        "avg_mark": 8.8,
         "prerequisites": [{"id": 2, "name": "SQL Basics"}]
     }
 ]
@@ -86,16 +86,19 @@ cources_info = [
     {
         **courses_short_info[0],
         "general_description": "An introductory course on system architecture",
+        "marks" : marks[0:5]
     },
     {
         **courses_short_info[1],
         "general_description": "Advanced data management concepts are covered in this course.",
         "extern_description": "Students can complete this course externally by submitting a portfolio of practical assignments.",
-        "recredit_description": "Recrediting is possible upon demonstration of equivalent prior learning."
+        "recredit_description": "Recrediting is possible upon demonstration of equivalent prior learning.",
+        "marks" : marks[5:7]
     },
     {
         **courses_short_info[2],
-        "general_description": "Comprehensive overview of database systems"
+        "general_description": "Comprehensive overview of database systems",
+        "marks" : marks[7:9]
     }
 ]
 

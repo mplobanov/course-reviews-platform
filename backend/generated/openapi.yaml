@@ -99,6 +99,8 @@ paths:
           description: List of course reviews
         "403":
           description: User not authorized
+        "404":
+          description: Course not found
       summary: Get course reviews
   /teachers:
     get:
@@ -206,18 +208,8 @@ components:
           name: name
           id: 6
         name: name
+        avg_mark: 5.637376656633329
         id: 0
-        marks:
-        - note: note
-          name: name
-          id: 5
-          value: 2.3021358869347655
-          max_value: 7.061401241503109
-        - note: note
-          name: name
-          id: 5
-          value: 2.3021358869347655
-          max_value: 7.061401241503109
         recredit_available: true
       properties:
         id:
@@ -242,11 +234,9 @@ components:
             $ref: '#/components/schemas/CourseShortInfo_prerequisites_inner'
           title: prerequisites
           type: array
-        marks:
-          items:
-            $ref: '#/components/schemas/CourseShortInfo_marks_inner'
-          title: marks
-          type: array
+        avg_mark:
+          title: avg_mark
+          type: number
       required:
       - has_extern
       - id
@@ -262,6 +252,10 @@ components:
       allOf:
       - $ref: '#/components/schemas/CourseShortInfo'
       - properties:
+          marks:
+            items:
+              $ref: '#/components/schemas/CourseInfo_allOf_marks_inner'
+            type: array
           general_description:
             type: string
           extern_description:
@@ -285,20 +279,21 @@ components:
           id: 6
         extern_description: extern_description
         name: name
+        avg_mark: 6.027456183070403
         general_description: general_description
         recredit_description: recredit_description
         id: 0
         marks:
         - note: note
           name: name
-          id: 5
-          value: 2.3021358869347655
-          max_value: 7.061401241503109
+          id: 1
+          value: 5.962133916683182
+          max_value: 5.637376656633329
         - note: note
           name: name
-          id: 5
-          value: 2.3021358869347655
-          max_value: 7.061401241503109
+          id: 1
+          value: 5.962133916683182
+          max_value: 5.637376656633329
         recredit_available: true
       title: CourseInfo
       type: object
@@ -384,18 +379,8 @@ components:
             name: name
             id: 6
           name: name
+          avg_mark: 5.637376656633329
           id: 0
-          marks:
-          - note: note
-            name: name
-            id: 5
-            value: 2.3021358869347655
-            max_value: 7.061401241503109
-          - note: note
-            name: name
-            id: 5
-            value: 2.3021358869347655
-            max_value: 7.061401241503109
           recredit_available: true
         - has_extern: true
           prerequisites:
@@ -409,18 +394,8 @@ components:
             name: name
             id: 6
           name: name
+          avg_mark: 5.637376656633329
           id: 0
-          marks:
-          - note: note
-            name: name
-            id: 5
-            value: 2.3021358869347655
-            max_value: 7.061401241503109
-          - note: note
-            name: name
-            id: 5
-            value: 2.3021358869347655
-            max_value: 7.061401241503109
           recredit_available: true
       properties:
         courses:
@@ -498,7 +473,7 @@ components:
           type: string
       title: CourseShortInfo_prerequisites_inner
       type: object
-    CourseShortInfo_marks_inner:
+    CourseInfo_allOf_marks_inner:
       allOf:
       - $ref: '#/components/schemas/Mark'
       - properties:
@@ -508,8 +483,8 @@ components:
       example:
         note: note
         name: name
-        id: 5
-        value: 2.3021358869347655
-        max_value: 7.061401241503109
-      title: CourseShortInfo_marks_inner
+        id: 1
+        value: 5.962133916683182
+        max_value: 5.637376656633329
+      title: CourseInfo_allOf_marks_inner
       type: object

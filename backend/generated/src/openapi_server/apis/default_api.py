@@ -62,6 +62,7 @@ async def get_course(
     responses={
         200: {"model": GetCourseReviews200Response, "description": "List of course reviews"},
         403: {"description": "User not authorized"},
+        404: {"description": "Course not found"},
     },
     tags=["default"],
     summary="Get course reviews",
