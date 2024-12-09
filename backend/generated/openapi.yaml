@@ -39,8 +39,7 @@ paths:
         schema:
           type: boolean
         style: form
-      - description: Text to search courses
-        explode: true
+      - explode: true
         in: query
         name: text_query
         required: false
@@ -57,26 +56,11 @@ paths:
         "403":
           description: User not authorized
       summary: Get courss
-    post:
-      operationId: postCourse
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CourseInfo'
-        required: true
-      responses:
-        "201":
-          description: Course created
-        "403":
-          description: User not authorized
-      summary: Create a course
   /courses/{id}:
     get:
       operationId: getCourse
       parameters:
-      - description: ID of the course
-        explode: false
+      - explode: false
         in: path
         name: id
         required: true
@@ -92,27 +76,20 @@ paths:
           description: Course details
         "403":
           description: User not authorized
+        "404":
+          description: Course not found
       summary: Get course details
   /courses/{id}/reviews:
     get:
       operationId: getCourseReviews
       parameters:
-      - description: ID of the course
-        explode: false
+      - explode: false
         in: path
         name: id
         required: true
         schema:
           type: integer
         style: simple
-      - description: Pagination cursor
-        explode: true
-        in: query
-        name: cursor
-        required: false
-        schema:
-          type: string
-        style: form
       responses:
         "200":
           content:
@@ -127,8 +104,7 @@ paths:
     get:
       operationId: getTeachers
       parameters:
-      - description: Search query for teachers
-        explode: true
+      - explode: true
         in: query
         name: query
         required: false
@@ -170,6 +146,10 @@ components:
         is_superuser:
           title: is_superuser
           type: boolean
+      required:
+      - id
+      - name
+      - passport_token
       title: User
       type: object
     Teacher:
@@ -452,7 +432,6 @@ components:
       type: object
     getCourseReviews_200_response:
       example:
-        next_cursor: next_cursor
         reviews:
         - is_recredit: true
           author:
@@ -504,9 +483,6 @@ components:
             $ref: '#/components/schemas/Review'
           title: reviews
           type: array
-        next_cursor:
-          title: next_cursor
-          type: string
       title: getCourseReviews_200_response
       type: object
     CourseShortInfo_prerequisites_inner:

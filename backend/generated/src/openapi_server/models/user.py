@@ -31,10 +31,10 @@ class User(BaseModel):
     """
     User
     """ # noqa: E501
-    id: Optional[StrictInt] = None
-    name: Optional[StrictStr] = None
+    id: StrictInt
+    name: StrictStr
     profile_pic_url: Optional[StrictStr] = None
-    passport_token: Optional[StrictStr] = None
+    passport_token: StrictStr
     is_superuser: Optional[StrictBool] = None
     __properties: ClassVar[List[str]] = ["id", "name", "profile_pic_url", "passport_token", "is_superuser"]
 

@@ -8,8 +8,7 @@ servers:
     description: Production server
 # TODO: Auth
 # TODO: Пагинация
-# TODO: Оставление отзыва
-# TODO: Лайк, Дизлайк
+# TODO: POST запросы
 # TODO: система оценок
 
 paths:
@@ -44,13 +43,11 @@ paths:
             type: boolean
         - name: text_query
           in: query
-          description: Text to search courses
           required: false
           schema:
             type: string
-        # TODO: пагинация
       responses:
-        '200':
+        "200":
           description: A list of courses
           content:
             application/json:
@@ -60,24 +57,24 @@ paths:
                   courses:
                     type: array
                     items:
-                      $ref: '#/components/schemas/CourseShortInfo'
+                      $ref: "#/components/schemas/CourseShortInfo"
 
-        '403':
+        "403":
           description: User not authorized
-    post:
-      summary: Create a course
-      operationId: postCourse
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CourseInfo'  #TODO: обдумать
-      responses:
-        '201':
-          description: Course created
-        '403':
-          description: User not authorized
+    # post:
+    #   summary: Create a course
+    #   operationId: postCourse
+    #   requestBody:
+    #     required: true
+    #     content:
+    #       application/json:
+    #         schema:
+    #           $ref: '#/components/schemas/CourseInfo'  #TODO: обдумать
+    #   responses:
+    #     '201':
+    #       description: Course created
+    #     '403':
+    #       description: User not authorized
 
   /courses/{id}:
     get:
@@ -86,7 +83,6 @@ paths:
       parameters:
         - name: id
           in: path
-          description: ID of the course
           required: true
           schema:
             type: integer
@@ -99,6 +95,8 @@ paths:
                 $ref: '#/components/schemas/CourseInfo'
         '403':
           description: User not authorized
+        '404':
+          description: "Course not found"
 
   /courses/{id}/reviews:
     get:
@@ -107,16 +105,9 @@ paths:
       parameters:
         - name: id
           in: path
-          description: ID of the course
           required: true
           schema:
             type: integer
-        - name: cursor #TODO: обдумать
-          in: query
-          description: Pagination cursor
-          required: false
-          schema:
-            type: string
       responses:
         '200':
           description: List of course reviews
@@ -129,10 +120,10 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Review'
-                  next_cursor:
-                    type: string
         '403':
           description: User not authorized
+        '404':
+          description: "Course not found"
 
   /teachers:
     get:
@@ -141,7 +132,6 @@ paths:
       parameters:
         - name: query
           in: query
-          description: Search query for teachers
           required: false
           schema:
             type: string
@@ -170,6 +160,7 @@ components:
           type: string
         is_superuser:
           type: boolean
+      required: [id, name, passport_token]
 
     Teacher:
       type: object
@@ -180,7 +171,7 @@ components:
           type: string
         average_grade:
           type: number
-      required: [ id ]
+      required: [id]
 
     Mark: #TODO: подумать
       type: object
@@ -193,7 +184,6 @@ components:
           type: number
         max_value:
           type: number
-
 
     CourseShortInfo:
       type: object
@@ -209,7 +199,7 @@ components:
         recredit_available:
           type: boolean
         teacher:
-          $ref: '#/components/schemas/Teacher'
+          $ref: "#/components/schemas/Teacher"
         prerequisites:
           type: array
           items:
@@ -224,17 +214,27 @@ components:
           items:
             type: object
             allOf:
-              - $ref: '#/components/schemas/Mark'
+              - $ref: "#/components/schemas/Mark"
               - type: object
                 properties:
                   note:
                     type: string
-      required: [ id, name, is_passed, has_extern,recredit_available, teacher, prerequisites, marks ]
+      required:
+        [
+          id,
+          name,
+          is_passed,
+          has_extern,
+          recredit_available,
+          teacher,
+          prerequisites,
+          marks,
+        ]
 
     CourseInfo:
       type: object
       allOf:
-        - $ref: '#/components/schemas/CourseShortInfo'
+        - $ref: "#/components/schemas/CourseShortInfo"
         - type: object
           properties:
             general_description:
@@ -245,7 +245,6 @@ components:
               type: string
           required: [general_description]
 
-
     Grade:
       type: object
       properties:
@@ -253,17 +252,17 @@ components:
           type: integer
         dislikes:
           type: integer
-      required: [likes, dislikes ]
+      required: [likes, dislikes]
 
     Review:
       type: object
       properties:
         author:
-          $ref: '#/components/schemas/User'
+          $ref: "#/components/schemas/User"
         marks:
           type: array
           items:
-            $ref: '#/components/schemas/Mark'
+            $ref: "#/components/schemas/Mark"
         text:
           type: string
         is_extern:
@@ -274,5 +273,5 @@ components:
           type: boolean
         grades:
           type: object
-          $ref: '#/components/schemas/Grade'
+          $ref: "#/components/schemas/Grade"
       required: [marks, grades]

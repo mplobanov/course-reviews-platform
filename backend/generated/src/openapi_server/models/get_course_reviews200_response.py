@@ -20,7 +20,7 @@ import json
 
 
 
-from pydantic import BaseModel, ConfigDict, StrictStr
+from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
 from openapi_server.models.review import Review
 try:
@@ -33,8 +33,7 @@ class GetCourseReviews200Response(BaseModel):
     GetCourseReviews200Response
     """ # noqa: E501
     reviews: Optional[List[Review]] = None
-    next_cursor: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["reviews", "next_cursor"]
+    __properties: ClassVar[List[str]] = ["reviews"]
 
     model_config = {
         "populate_by_name": True,
@@ -92,8 +91,7 @@ class GetCourseReviews200Response(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "reviews": [Review.from_dict(_item) for _item in obj.get("reviews")] if obj.get("reviews") is not None else None,
-            "next_cursor": obj.get("next_cursor")
+            "reviews": [Review.from_dict(_item) for _item in obj.get("reviews")] if obj.get("reviews") is not None else None
         })
         return _obj
 
